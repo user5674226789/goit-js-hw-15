@@ -63,11 +63,11 @@ searchForm.addEventListener('submit', async event => {
 });
 
 loadMoreBtn.addEventListener('click', onLoadMoreBtn);
-async function onLoadMoreBtn() {
+function onLoadMoreBtn() {
   currentPage += 1;
   showElemLoader();
   try {
-    const data = await fetchImages(searchQueryResult, currentPage);
+    const data = fetchImages(searchQueryResult, currentPage);
     renderGallery(data);
     lightbox.refresh();
   } catch (error) {
