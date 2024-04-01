@@ -41,5 +41,5 @@ export function renderGallery(data) {
     })
     .join('');
 
-  gallery.insertAdjacentHTML('afterbegin', createMarkup);
+  gallery.insertAdjacentHTML('beforeend', createMarkup);
 }
