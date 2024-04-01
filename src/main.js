@@ -20,7 +20,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
   gallery.innerHTML = '';
@@ -63,6 +62,7 @@ searchForm.addEventListener('submit', async event => {
   }
 });
 
+loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 async function onLoadMoreBtn() {
   currentPage += 1;
   showElemLoader();
@@ -70,10 +70,6 @@ async function onLoadMoreBtn() {
     const data = await fetchImages(searchQueryResult, currentPage);
     renderGallery(data);
     lightbox.refresh();
-    window.scrollBy({
-      top: 578,
-      behavior: 'smooth',
-    });
   } catch (err) {
     iziToast.error({
       position: 'topRight',
