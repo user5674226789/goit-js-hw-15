@@ -2,7 +2,6 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import axios from 'axios';
 import { fetchImages } from './js/pixabay-api';
 import { renderGallery } from './js/render-functions';
 
@@ -14,6 +13,7 @@ let searchQueryResult;
 let totalPage;
 let currentPage = 1;
 const maxPage = 15;
+
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
@@ -73,7 +73,7 @@ async function onLoadMoreBtn() {
   } catch (error) {
     iziToast.error({
       position: 'topRight',
-      message: 'ERROR',
+      message: 'Error next render gallery',
     });
   }
   hideElemLoader();
