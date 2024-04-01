@@ -2,7 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
+import axios from 'axios';
 import { fetchImages } from './js/pixabay-api';
 import { renderGallery } from './js/render-functions';
 
@@ -70,7 +70,7 @@ async function onLoadMoreBtn() {
     const data = await fetchImages(searchQueryResult, currentPage);
     renderGallery(data);
     lightbox.refresh();
-  } catch (err) {
+  } catch (error) {
     iziToast.error({
       position: 'topRight',
       message: 'ERROR',
@@ -84,7 +84,7 @@ function checkBtnStatus() {
   if (currentPage >= maxPage) {
     hideButton();
     iziToast.info({
-      message: "We're sorry, there are no more posts to load",
+      message: "We're sorry, there are no more images to load",
       position: 'topRight',
     });
   } else {
@@ -105,12 +105,3 @@ function hideElemLoader() {
 function showElemLoader() {
   elemLoader.classList.remove('is-hidden');
 }
-
-// console.log(data);
-// console.log(data.hits);
-// console.log(data.totalHits);
-
-// console.log(searchQueryResult);
-// console.log(data);
-// console.log(data.hits);
-// console.log(data.totalHits);
