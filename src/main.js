@@ -11,9 +11,9 @@ const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('#load-more-btn');
 const elemLoader = document.querySelector('#loader');
 let searchQueryResult;
-let maxPage = 0;
+let totalPage;
 let currentPage = 1;
-const pageSize = 15;
+const maxPage = 15;
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
@@ -36,7 +36,7 @@ searchForm.addEventListener('submit', async event => {
     try {
       showElemLoader();
       const data = await fetchImages(searchQueryResult, currentPage);
-      maxPage = Math.ceil(data.totalHits / pageSize);
+      totalPage = Math.ceil(data.totalHits / maxPage);
       if (!data.hits.length) {
         hideElemLoader();
         hideButton();
@@ -81,7 +81,7 @@ async function onLoadMoreBtn() {
 }
 
 function checkBtnStatus() {
-  if (currentPage >= maxPage) {
+  if (currentPage >= totalPage) {
     hideButton();
     iziToast.info({
       message: "We're sorry, there are no more images to load",
