@@ -14,7 +14,7 @@ let searchQueryResult;
 let maxPage = 0;
 let currentPage = 1;
 const pageSize = 15;
-const lightbox = await new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,
