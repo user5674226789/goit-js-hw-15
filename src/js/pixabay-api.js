@@ -18,9 +18,10 @@ export async function fetchImages(searchQueryResult, currentPage) {
     const res = await axios.get(url);
     return res.data;
   } catch (error) {
-    return iziToast.error({
+    iziToast.error({
       message: 'Server error!',
       position: 'topRight',
     });
+    return console.log(error);
   }
 }
