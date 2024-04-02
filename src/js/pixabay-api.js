@@ -4,7 +4,7 @@ import iziToast from 'izitoast';
 export async function fetchImages(searchQueryResult, currentPage) {
   try {
     const BASE_URL = 'https://pixabay.com/api/';
-    const q = searchQueryResult.trim().split(',').join('+');
+    const q = searchQueryResult;
     const params = new URLSearchParams({
       key: '42946583-b9bd64904b8b2d582b051d84e',
       q: q,

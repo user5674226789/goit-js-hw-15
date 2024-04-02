@@ -68,7 +68,7 @@ async function onLoadMoreBtn() {
   currentPage += 1;
   showElemLoader();
   try {
-    data = await fetchImages(searchQueryResult, currentPage);
+    data = await fetchImages(currentPage);
     renderGallery(data);
     lightbox.refresh();
   } catch (error) {
