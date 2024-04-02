@@ -78,6 +78,7 @@ async function onLoadMoreBtn() {
     });
     return console.log(error);
   }
+  onScroll();
   hideElemLoader();
   checkBtnStatus();
 }
@@ -92,6 +93,15 @@ function checkBtnStatus() {
   } else {
     showButton();
   }
+}
+
+function onScroll() {
+  const height = gallery.firstChild.getBoundingClientRect().height;
+
+  scrollBy({
+    top: height * 2,
+    behavior: 'smooth',
+  });
 }
 
 function hideButton() {
