@@ -36,7 +36,7 @@ searchForm.addEventListener('submit', async event => {
   } else {
     try {
       showElemLoader();
-      const data = await fetchImages(searchQueryResult, currentPage);
+      data = await fetchImages(searchQueryResult, currentPage);
       totalPage = Math.ceil(data.totalHits / maxPage);
       if (!data.hits.length) {
         hideElemLoader();
