@@ -78,13 +78,14 @@ async function onLoadMoreBtn() {
     });
     return console.log(error);
   }
-  onScroll();
   hideElemLoader();
+  onScroll();
   checkBtnStatus();
 }
 
 function checkBtnStatus() {
   if (currentPage >= totalPage) {
+    hideElemLoader();
     hideButton();
     iziToast.info({
       message: "We're sorry, there are no more images to load",
