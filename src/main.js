@@ -13,6 +13,7 @@ let searchQueryResult;
 let totalPage;
 let currentPage = 1;
 const maxPage = 15;
+let data;
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -67,7 +68,7 @@ async function onLoadMoreBtn() {
   currentPage += 1;
   showElemLoader();
   try {
-    const data = await fetchImages(searchQueryResult, currentPage);
+    data = await fetchImages(searchQueryResult, currentPage);
     renderGallery(data);
     lightbox.refresh();
   } catch (error) {
@@ -75,6 +76,7 @@ async function onLoadMoreBtn() {
       position: 'topRight',
       message: 'Error next render gallery',
     });
+    return console.log(error);
   }
   hideElemLoader();
   checkBtnStatus();
