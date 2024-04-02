@@ -97,10 +97,10 @@ function checkBtnStatus() {
 }
 
 function onScroll() {
-  const height = gallery.firstChild.getBoundingClientRect().height;
-
-  scrollBy({
-    top: height * 2,
+  const galleryCard = document.querySelector('.gallery-image');
+  const cardHeight = galleryCard.getBoundingClientRect().height;
+  window.scrollBy({
+    top: cardHeight * 2,
     behavior: 'smooth',
   });
 }
