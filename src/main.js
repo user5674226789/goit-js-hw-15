@@ -31,7 +31,6 @@ searchForm.addEventListener('submit', async event => {
       message: `The search field is empty. Please try again!`,
       position: 'topRight',
     });
-    hideButton();
     searchForm.reset();
     return;
   } else {
@@ -41,12 +40,12 @@ searchForm.addEventListener('submit', async event => {
       totalPage = Math.ceil(data.totalHits / maxPage);
       if (!data.hits.length) {
         hideElemLoader();
-        hideButton();
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again.',
           position: 'topRight',
         });
+        checkBtnStatus();
       } else {
         hideElemLoader();
         renderGallery(data);
@@ -83,19 +82,6 @@ async function onLoadMoreBtn() {
   checkBtnStatus();
 }
 
-function checkBtnStatus() {
-  if (currentPage >= totalPage) {
-    hideElemLoader();
-    hideButton();
-    iziToast.info({
-      message: "We're sorry, there are no more images to load",
-      position: 'topRight',
-    });
-  } else {
-    showButton();
-  }
-}
-
 function onScroll() {
   const galleryCard = document.querySelector('.gallery-image');
   const cardHeight = galleryCard.getBoundingClientRect().height;
@@ -105,11 +91,16 @@ function onScroll() {
   });
 }
 
-function hideButton() {
-  loadMoreBtn.classList.add('is-hidden');
-}
-function showButton() {
-  loadMoreBtn.classList.remove('is-hidden');
+function checkBtnStatus() {
+  if (currentPage >= totalPage) {
+    loadMoreBtn.classList.add('is-hidden');
+    iziToast.info({
+      message: "We're sorry, there are no more images to load",
+      position: 'topRight',
+    });
+  } else {
+    loadMoreBtn.classList.remove('is-hidden');
+  }
 }
 
 function hideElemLoader() {
