@@ -22,6 +22,5 @@ export async function fetchImages(searchQueryResult, currentPage) {
       message: 'Server error!',
       position: 'topRight',
     });
-    return console.log(error);
   }
 }

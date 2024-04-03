@@ -11,7 +11,7 @@ const loadMoreBtn = document.querySelector('#load-more-btn');
 const elemLoader = document.querySelector('#loader');
 let searchQueryResult;
 let totalPage;
-let currentPage = 1;
+let currentPage;
 const maxPage = 15;
 let data;
 
@@ -24,7 +24,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
   gallery.innerHTML = '';
-  const searchQueryResult = event.target.elements.query.value;
+  currentPage = 1;
+  searchQueryResult = event.target.elements.query.value;
   if (searchQueryResult.trim() == '') {
     iziToast.warning({
       message: `The search field is empty. Please try again!`,
@@ -68,7 +69,7 @@ async function onLoadMoreBtn() {
   currentPage += 1;
   showElemLoader();
   try {
-    data = await fetchImages(currentPage);
+    data = await fetchImages(searchQueryResult, currentPage);
     renderGallery(data);
     lightbox.refresh();
   } catch (error) {
@@ -76,7 +77,6 @@ async function onLoadMoreBtn() {
       position: 'topRight',
       message: 'Error next render gallery',
     });
-    return console.log(error);
   }
   hideElemLoader();
   onScroll();
